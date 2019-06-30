@@ -26,14 +26,14 @@ exports.signUp = async function (req, res, next) {
         //Retrieve values from the user.
         let {
             id,
-            userName,
+            username,
             profileImageUrl
         } = user;
 
         //Create a json web token using those values.
         let token = jwt.sign({
                 id,
-                userName,
+                username,
                 profileImageUrl
             },
             process.env.SECRET_KEY
@@ -42,7 +42,7 @@ exports.signUp = async function (req, res, next) {
         //Return the new user with their token.
         return res.status(200).json({
             id,
-            userName,
+            username,
             profileImageUrl,
             token
         });
