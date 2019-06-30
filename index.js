@@ -6,6 +6,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const errorHandler = require('./handlers/error');
 
 //Port Number.
 const PORT = 8080;
@@ -19,6 +20,9 @@ app.use(function (req, res, next) {
     err.status = 404;
     next(err);
 });
+
+//Error handler.
+app.use(errorHandler);
 
 //Listen on the port.
 app.listen(PORT, function () {
