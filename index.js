@@ -2,17 +2,24 @@
  * Back-end REST server.
  */
 
+//Environment variables.
+require('dotenv').config();
+
 //Imports.
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const errorHandler = require('./handlers/error');
+const authRoutes = require('./routes/auth');
 
 //Port Number.
 const PORT = 8080;
 
 //Body parser.
 app.use(bodyParser.json());
+
+//Auth routes.
+app.use("/api/auth", authRoutes);
 
 //Error function.
 app.use(function (req, res, next) {

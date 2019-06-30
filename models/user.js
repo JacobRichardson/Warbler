@@ -4,7 +4,7 @@
 
 //Imports.
 const mongoose = require('mongoose');
-const bcrpyt = require('bcrpyt');
+const bcrpyt = require('bcrypt');
 
 //User schema.
 const userSchema = new mongoose.Schema({
