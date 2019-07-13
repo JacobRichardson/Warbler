@@ -9,8 +9,64 @@ const jwt = require('jsonwebtoken');
 /** 
  * Sign in function to log a user in.
  */
-exports.signIn = function () {
+exports.signIn = async function (req, res, next) {
 
+    try {
+
+        //Find the user by their email.
+        let user = await db.User.findOne({
+            email: req.body.email
+        });
+
+        //Retrieve values from the user.
+        let {
+            id,
+            username,
+            profileImageUrl
+        } = user;
+
+        //Use the compare password method to determine if their password is correct.
+        let isMatch = await user.comparePassword(req.body.password);
+
+        //If the password is correct.
+        if (isMatch) {
+
+            //Create a json web token using those values.
+            let token = jwt.sign({
+                    id,
+                    username,
+                    profileImageUrl
+                },
+                process.env.SECRET_KEY
+            );
+
+            //Return a 200 status with the user's information.
+            return res.status(200).json({
+                id,
+                username,
+                profileImageUrl,
+                token
+            });
+        }
+        // The user's password was incorrect.
+        else {
+
+            //Return saying invalid email or password.
+            return next({
+                status: 400,
+                message: "Invalid Email/Password"
+            });
+
+        }
+
+    } catch (e) {
+
+        //Return saying invalid email or password.
+        return next({
+            status: 400,
+            message: "Invalid Email/Password"
+        });
+    }
 }
 
 /** 
