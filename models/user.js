@@ -62,7 +62,7 @@ userSchema.pre("save", async function (next) {
  * Instance method for the user model.
  * This method determines if the the password is correct.
  */
-userSchema.method.comparePassword = async function (candidatePassword, next) {
+userSchema.methods.comparePassword = async function (candidatePassword, next) {
     try {
 
         //Use bcrypt to see if the the password is correct.
