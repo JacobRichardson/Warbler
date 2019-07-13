@@ -14,5 +14,8 @@ mongoose.Promise = Promise;
 //Connect to the database.
 mongoose.connect('mongodb://localhost/warbler');
 
-//Exports the user model.
+//Export the user model.
 module.exports.User = require('./user');
+
+//Export the message model.
+module.exports.Message = require('./message');
