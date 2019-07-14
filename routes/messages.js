@@ -5,7 +5,9 @@
 //Imports.
 const express = require('express');
 const {
-    createMessage
+    createMessage,
+    getMessage,
+    deleteMessage
 } = require('../handlers/messages');
 
 //Route with merge params.
@@ -15,6 +17,12 @@ const router = express.Router({
 
 //Post route for creating a message. (prefix '/api/users/:id/messages')
 router.route("/").post(createMessage);
+
+//Get route and delete route for messages. (prefix '/api/users/:id/messages)
+router
+    .route("/:message_id")
+    .get(getMessage)
+    .delete(deleteMessage);
 
 //Export the router.
 module.exports = router;

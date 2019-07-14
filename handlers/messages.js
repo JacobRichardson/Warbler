@@ -46,10 +46,47 @@ exports.createMessage = async function (req, res, next) {
 
 /** 
  * Get message function to get a message.
+ * GET - /api/users/:id/messages/:message_id
  */
-exports.getMessage = async function (req, res, next) {};
+exports.getMessage = async function (req, res, next) {
+
+    try {
+
+        //Find the message by it's message id.
+        let message = await db.Message.find({
+            _id: req.params.message_id
+        });
+
+        //Return the message.
+        return res.status(200).json(message);
+
+    } catch (e) {
+
+        //Return next with the error.
+        return next(e);
+    }
+};
 
 /** 
  * Delete message function to delete a message.
+ * DELETE - /api/users/:id/messages/:message_id
  */
-exports.deleteMessage = async function (req, res, next) {};
+exports.deleteMessage = async function (req, res, next) {
+
+    try {
+
+        //Find the message by it's id.
+        let foundMessage = await db.Message.findById(req.params.message_id);
+
+        //Remove the message.
+        await foundMessage.remove();
+
+        //Return the deleted message.
+        res.status(200).json(foundMessage);
+
+    } catch (e) {
+
+        //Return next with the error.
+        return next(e);
+    }
+};
