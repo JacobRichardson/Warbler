@@ -12,6 +12,10 @@ const bodyParser = require('body-parser');
 const errorHandler = require('./handlers/error');
 const authRoutes = require('./routes/auth');
 const messagesRoutes = require('./routes/messages');
+const {
+    loginRequired,
+    ensureCorrectUser
+} = require("./middleware/auth");
 
 //Port Number.
 const PORT = 8080;
@@ -21,7 +25,14 @@ app.use(bodyParser.json());
 
 //Auth routes.
 app.use("/api/auth", authRoutes);
-app.use("/api/users/:id/messages", messagesRoutes);
+
+//Message routes.
+app.use(
+    "/api/users/:id/messages",
+    loginRequired,
+    ensureCorrectUser,
+    messagesRoutes
+);
 
 //Error function.
 app.use(function (req, res, next) {
