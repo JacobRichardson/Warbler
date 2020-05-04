@@ -18,8 +18,8 @@ const {
     ensureCorrectUser
 } = require("./middleware/auth");
 
-//Port Number.
-const PORT = 8080;
+// User the environments port of default to 8080.
+const PORT = process.env.PORT || 8080;
 
 //Body parser.
 app.use(bodyParser.json());
