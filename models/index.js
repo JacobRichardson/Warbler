@@ -11,8 +11,8 @@ mongoose.set("debug", true);
 //Make Mongo use promises.
 mongoose.Promise = Promise;
 
-//Connect to the database.
-mongoose.connect('mongodb://localhost/warbler');
+// Use the environment's Mongo URI or the local host to connect to the database.
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/warbler');
 
 //Export the user model.
 module.exports.User = require('./user');
