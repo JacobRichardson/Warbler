@@ -44,6 +44,33 @@ exports.createMessage = async function (req, res, next) {
 
 };
 
+/**
+ * Retrieves all messages of a user.
+ * POST - /api/users/:id/messages
+ * @param {Object} req The request object.
+ * @param {Object} res The response object.
+ * @param {Function} next The next function to be called.
+ * @returns {Object} All messages records for the user.
+ */
+exports.getAllMessages = async function (req, res, next) {
+
+    try {
+
+        // Find all followers where the followee id equals the user's id.
+        const messages = await db.Message.find({
+            user: `${req.params.id}`,
+        });
+
+        // Return the populated followers.
+        return res.status(200).json(messages);
+
+    } catch (e) {
+
+        // Return next with the error.
+        return next(e);
+    }
+};
+
 /** 
  * Get message function to get a message.
  * GET - /api/users/:id/messages/:message_id
