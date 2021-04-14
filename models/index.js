@@ -12,7 +12,10 @@ mongoose.set("debug", true);
 mongoose.Promise = Promise;
 
 // Use the environment's Mongo URI or the local host to connect to the database.
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/warbler');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/warbler', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
 
 //Export the user model.
 module.exports.User = require('./user');
