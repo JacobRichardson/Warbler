@@ -15,6 +15,15 @@ mongoose.Promise = Promise;
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/warbler', {
     useNewUrlParser: true,
     useUnifiedTopology: true
+}).then(() => {
+
+    // Logging statement.
+    console.log('Successfully connected to database.');
+
+}).catch((err) => {
+
+    // Log the error.
+    console.log(`Connecting to the database failed. ${err.message}`)
 });
 
 //Export the user model.
