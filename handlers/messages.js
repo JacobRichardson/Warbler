@@ -117,3 +117,30 @@ exports.deleteMessage = async function (req, res, next) {
         return next(e);
     }
 };
+
+/**
+ * Updates message function to update a message.
+ * PATCH - /api/users/:id/messages/:message_id
+ */
+exports.updateMessage = async function (req, res, next) {
+
+    try {
+
+        // Find the message by it's id and update the likes.
+        let foundMessage = await db.Message.findByIdAndUpdate(req.params.message_id, {
+            $set: {
+                likes: req.body.likes
+            }
+        });
+
+        // Return a 200 and the newly updated message.
+        res.status(200).json(foundMessage);
+
+    } catch (e) {
+
+        console.log(e);
+
+        //Return next with the error.
+        return next(e);
+    }
+};

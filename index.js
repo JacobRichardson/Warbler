@@ -31,7 +31,8 @@ app.use("/api/auth", authRoutes);
 app.use(
     "/api/users/:id/messages",
     loginRequired,
-    ensureCorrectUser,
+    // TODO: Figure out how to allow other uses to like, but not delete or change text.
+    // ensureCorrectUser,
     messagesRoutes
 );
 

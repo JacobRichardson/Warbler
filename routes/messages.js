@@ -8,7 +8,8 @@ const {
     createMessage,
     getMessage,
     getAllMessages,
-    deleteMessage
+    deleteMessage,
+    updateMessage
 } = require('../handlers/messages');
 
 //Route with merge params.
@@ -29,7 +30,8 @@ router.route("/")
 router
     .route("/:message_id")
     .get(getMessage)
-    .delete(deleteMessage);
+    .delete(deleteMessage)
+    .patch(updateMessage);
 
 //Export the router.
 module.exports = router;
