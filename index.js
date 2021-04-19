@@ -13,6 +13,7 @@ const db = require('./models');
 const errorHandler = require('./handlers/error');
 const authRoutes = require('./routes/auth');
 const messagesRoutes = require('./routes/messages');
+const userRoutes = require('./routes/user');
 const {
     loginRequired,
     ensureCorrectUser
@@ -34,6 +35,13 @@ app.use(
     // TODO: Figure out how to allow other uses to like, but not delete or change text.
     // ensureCorrectUser,
     messagesRoutes
+);
+
+// User routes.
+app.use(
+    '/api/users',
+    loginRequired,
+    userRoutes
 );
 
 app.get('/api/messages', loginRequired, async function (req, res, next) {
