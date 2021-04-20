@@ -28,6 +28,10 @@ const userSchema = new mongoose.Schema({
     messages: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Message"
+    }],
+    followees: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
     }]
 });
 

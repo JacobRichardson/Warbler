@@ -5,7 +5,8 @@
 // Imports.
 const express = require('express');
 const {
-    getUser
+    getUser,
+    updateUser
 } = require('../handlers/user');
 
 // Route with merge params.
@@ -18,7 +19,7 @@ router.route('/:id')
 
     // Get route for a specific user.
     .get(getUser)
-
+    .patch(updateUser);
 
 //Export the router.
 module.exports = router;
